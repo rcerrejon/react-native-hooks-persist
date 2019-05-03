@@ -17,6 +17,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     AsyncStorage.getItem(dbName)
       .then(item => {
         const parsedItem = JSON.parse(item);
+        console.log('---------------> parsedItem: ', parsedItem);
         setValue(parsedItem);
       })
       .catch(error => console.log('get Item failed with error: ', error));
@@ -48,8 +49,8 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
       .catch(error => console.log('get Item failed with error: ', error));
   }
 
-  const [getValue, setValue] = useState(fieldValue);
-  useEffect(getStore, []);
+  const [getValue, setValue] = useState({ [fieldKey]: fieldValue });
+  useEffect(() => getStore, []);
   return [getValue, setStore];
 }
 
