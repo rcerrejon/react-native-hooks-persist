@@ -16,9 +16,16 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
   function getStore() {
     AsyncStorage.getItem(dbName)
       .then(item => {
-        const parsedItem = JSON.parse(item);
-        console.log('---------------> parsedItem: ', parsedItem);
-        setValue(parsedItem);
+        if (item !== null) {
+          console.log('---------------> item0: ', item);
+          const parsedItem = JSON.parse(item);
+          console.log('---------------> parsedItem: ', parsedItem);
+          setValue(parsedItem);
+        } else {
+          const initObjectToSave = { [fieldKey]: fieldValue };
+          console.log('---------------> initObjectToSave: ', initObjectToSave);
+          setValue(initObjectToSave);
+        }
       })
       .catch(error => console.log('get Item failed with error: ', error));
   }
@@ -27,6 +34,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     AsyncStorage.getItem(db)
       .then(item => {
         if (item !== null) {
+          console.log('---------------> item1: ', item);
           const objCreated = { [key]: value };
           const parsedItem = JSON.parse(item);
           const objToSave = { ...parsedItem, ...objCreated };
@@ -38,9 +46,11 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           }
         } else {
           const objectToSave = { [key]: value };
+          console.log('---------------> item2: ', item);
+          console.log('---------------> objectToSave: ', objectToSave);
           try {
             AsyncStorage.setItem(db, JSON.stringify(objectToSave));
-            setValue(item);
+            setValue(objectToSave);
           } catch (error) {
             console.log('set Item failed with error: ', error);
           }
@@ -49,8 +59,11 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
       .catch(error => console.log('get Item failed with error: ', error));
   }
 
-  const [getValue, setValue] = useState({ [fieldKey]: fieldValue });
-  useEffect(() => getStore, []);
+  const [getValue, setValue] = useState(() => {
+    const initValue = { [fieldKey]: fieldValue };
+    return initValue;
+  });
+  useEffect(getStore);
   return [getValue, setStore];
 }
 
