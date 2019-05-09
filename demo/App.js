@@ -7,54 +7,37 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, NativeModules } from 'react-native';
-import {
-  useStatePersist,
-  removeStatePersist,
-} from 'react-native-hooks-persist';
-
-if (__DEV__) {
-  NativeModules.DevSettings.setIsDebuggingRemotely(true);
-}
+import React from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { useStatePersist, removeStatePersist } from 'react-native-hooks-persist';
 
 const App = (props: any) => {
   const DB_NAME = 'globalStorage';
+
   const FIELD_KEY = 'buttonSelected';
-  const FIELD_VALUE = 'One';
+  const INITIAL_VALUE = 'No';
 
-  const [value, setValue] = useStatePersist(DB_NAME, FIELD_KEY, FIELD_VALUE);
+  const [value, setValue] = useStatePersist(DB_NAME, FIELD_KEY, INITIAL_VALUE);
 
-  // const DB_NAME_TEST2 = 'anotherStorage';
-  // const FIELD_KEY_TEST2 = 'anotherTest';
-  // const INITIAL_VALUE_TEST2 = 'tomato';
+  const FIELD_KEY_COLOR = 'color';
 
-  // const [anotherStore, setAnotherStore] = useStatePersist(
-  //   DB_NAME_TEST2,
-  //   FIELD_KEY_TEST2,
-  //   INITIAL_VALUE_TEST2,
-  // );
-  console.log('-----> value: ', value);
   return (
     <View style={styles.container}>
-      <Button
-        onPress={() => setValue(DB_NAME, FIELD_KEY, 'One')}
-        title="Button 1"
-      />
-      <Button
-        onPress={() => setValue(DB_NAME, FIELD_KEY, 'Two')}
-        title="Button 2"
-      />
-      <Button
-        onPress={() => setValue(DB_NAME, FIELD_KEY, 'Three')}
-        title="Button 3"
-      />
-      <Button
-        onPress={() => removeStatePersist(DB_NAME, FIELD_KEY)}
-        title="Remove"
-      />
       <Text style={styles.welcome}>Welcome to React Native Hooks Persist!</Text>
-      <Text style={styles.instructions}>{value.buttonSelected} Selected</Text>
+      <View style={styles.buttonSelectedContainer}>
+        <Button onPress={() => setValue(DB_NAME, FIELD_KEY, 1)} title="Set 1" />
+        <Button onPress={() => setValue(DB_NAME, FIELD_KEY, 2)} title="Set 2" />
+        <Button onPress={() => setValue(DB_NAME, FIELD_KEY, 3)} title="Set 3" />
+        <Button onPress={() => removeStatePersist(DB_NAME, FIELD_KEY)} title="Remove Number" />
+        <Text style={styles.textSelected}>{value.buttonSelected} Saved</Text>
+      </View>
+      <View style={styles.buttonSelectedContainer}>
+        <Button onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Red')} title="Set Red" />
+        <Button onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Green')} title="Set Green" />
+        <Button onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Blue')} title="Set Blue" />
+        <Button onPress={() => removeStatePersist(DB_NAME, FIELD_KEY_COLOR)} title="Remove Color" />
+        <Text style={styles.textSelected}>{value.color} Saved</Text>
+      </View>
     </View>
   );
 };
@@ -64,17 +47,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
+  },
+  buttonSelectedContainer: {
+    borderWidth: 1,
+    borderColor: '#333333',
+    backgroundColor: '#CCCCCC',
+    width: '100%',
+    marginVertical: 5,
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+  textSelected: {
+    fontWeight: 'bold',
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    marginVertical: 10,
   },
 });
 
