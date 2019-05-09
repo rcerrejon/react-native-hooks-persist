@@ -1,29 +1,15 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-// const DB_NAME = 'globalStorage';
-// const FIELD_KEY = 'number';
-// const FIELD_VALUE = 'one';
-
-// const [numberValue, setNumberValue] = useStatePersist(DB_NAME, FIELD_KEY, FIELD_VALUE);
-
-// <Text>{numberValue.number} Clicked</Text>
-// setNumberValue(DB_NAME, FIELD_KEY, 'two')
-
-// removeStatePersist(DB_NAME, FIELD_KEY)
-
 export function useStatePersist(dbName, fieldKey, fieldValue) {
   function getStore() {
     AsyncStorage.getItem(dbName)
       .then(item => {
         if (item !== null) {
-          console.log('---------------> item0: ', item);
           const parsedItem = JSON.parse(item);
-          console.log('---------------> parsedItem: ', parsedItem);
           setValue(parsedItem);
         } else {
           const initObjectToSave = { [fieldKey]: fieldValue };
-          console.log('---------------> initObjectToSave: ', initObjectToSave);
           setValue(initObjectToSave);
         }
       })
@@ -34,7 +20,6 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     AsyncStorage.getItem(db)
       .then(item => {
         if (item !== null) {
-          console.log('---------------> item1: ', item);
           const objCreated = { [key]: value };
           const parsedItem = JSON.parse(item);
           const objToSave = { ...parsedItem, ...objCreated };
@@ -46,8 +31,6 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           }
         } else {
           const objectToSave = { [key]: value };
-          console.log('---------------> item2: ', item);
-          console.log('---------------> objectToSave: ', objectToSave);
           try {
             AsyncStorage.setItem(db, JSON.stringify(objectToSave));
             setValue(objectToSave);
