@@ -9,7 +9,11 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { useStatePersist, removeStatePersist } from 'react-native-hooks-persist';
+import {
+  useStatePersist,
+  removeStatePersist,
+  debugStatePersist,
+} from 'react-native-hooks-persist';
 
 const App = (props: any) => {
   const DB_NAME = 'globalStorage';
@@ -28,15 +32,36 @@ const App = (props: any) => {
         <Button onPress={() => setValue(DB_NAME, FIELD_KEY, 1)} title="Set 1" />
         <Button onPress={() => setValue(DB_NAME, FIELD_KEY, 2)} title="Set 2" />
         <Button onPress={() => setValue(DB_NAME, FIELD_KEY, 3)} title="Set 3" />
-        <Button onPress={() => removeStatePersist(DB_NAME, FIELD_KEY)} title="Remove Number" />
+        <Button
+          onPress={() => removeStatePersist(DB_NAME, FIELD_KEY)}
+          title="Remove Number"
+        />
         <Text style={styles.textSelected}>{value.buttonSelected} Saved</Text>
       </View>
       <View style={styles.buttonSelectedContainer}>
-        <Button onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Red')} title="Set Red" />
-        <Button onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Green')} title="Set Green" />
-        <Button onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Blue')} title="Set Blue" />
-        <Button onPress={() => removeStatePersist(DB_NAME, FIELD_KEY_COLOR)} title="Remove Color" />
+        <Button
+          onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Red')}
+          title="Set Red"
+        />
+        <Button
+          onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Green')}
+          title="Set Green"
+        />
+        <Button
+          onPress={() => setValue(DB_NAME, FIELD_KEY_COLOR, 'Blue')}
+          title="Set Blue"
+        />
+        <Button
+          onPress={() => removeStatePersist(DB_NAME, FIELD_KEY_COLOR)}
+          title="Remove Color"
+        />
         <Text style={styles.textSelected}>{value.color} Saved</Text>
+      </View>
+      <View style={styles.buttonSelectedContainer}>
+        <Button
+          onPress={() => debugStatePersist(DB_NAME)}
+          title="Debug State Persist"
+        />
       </View>
     </View>
   );
