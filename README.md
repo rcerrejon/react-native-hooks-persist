@@ -6,7 +6,7 @@ React Native Hooks Persist with Async Storage
 
 ![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
 
-![GitHub All Releases](https://img.shields.io/github/downloads/rcerrejon/react-native-hooks-persist/total.svg)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/rcerrejon/react-native-hooks-persist.svg)
 
 ![NPM](https://img.shields.io/npm/l/react-native-hooks-persist.svg)
 
