@@ -19,7 +19,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
   function setStore(db, key, value) {
     AsyncStorage.getItem(db)
       .then(item => {
-        if (item !== null) {
+        if (item) {
           const objCreated = { [key]: value };
           const parsedItem = JSON.parse(item);
           const objToSave = { ...parsedItem, ...objCreated };
@@ -53,7 +53,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
 export function removeStatePersist(dbName, fieldKey) {
   AsyncStorage.getItem(dbName)
     .then(item => {
-      if (item !== null) {
+      if (item) {
         const parsedItem = JSON.parse(item);
         delete parsedItem[fieldKey];
         try {
@@ -61,6 +61,16 @@ export function removeStatePersist(dbName, fieldKey) {
         } catch (error) {
           console.log('set Item failed with error: ', error);
         }
+      }
+    })
+    .catch(error => console.log('get Item failed with error: ', error));
+}
+
+export function debugStatePersist(dbName) {
+  AsyncStorage.getItem(dbName)
+    .then(item => {
+      if (item) {
+        console.log('Debug All State Persist: ', JSON.parse(item));
       }
     })
     .catch(error => console.log('get Item failed with error: ', error));
