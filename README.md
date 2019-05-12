@@ -1,18 +1,84 @@
 # React-Native Hooks Persist
 
-<a href="url"><img src="hook.png" align="left" height="250" ></a>
+<a href="url"><img src="demo/images/hook.png" align="left" height="250" ></a>
 
 React Native Hooks Persist with Async Storage
 
 ![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
 
-![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/rcerrejon/react-native-hooks-persist/total.svg)
 
-![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
+![NPM](https://img.shields.io/npm/l/react-native-hooks-persist.svg)
 
-![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
+![GitHub issues](https://img.shields.io/github/issues-raw/rcerrejon/react-native-hooks-persist.svg)
 
-![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
+![GitHub stars](https://img.shields.io/github/stars/rcerrejon/react-native-hooks-persist.svg?style=social)
 
-## Install
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum egestas feugiat. Maecenas porttitor tortor tellus, ut pretium enim iaculis vitae. Etiam quis ex tellus. Sed varius ligula et velit laoreet consectetur. Morbi augue nisi, condimentum sed purus in, viverra ullamcorper augue. Quisque at nisi congue nibh hendrerit congue. Fusce ac malesuada nulla, imperdiet tincidunt justo.
+## Getting Started
+### Install
+`yarn add react-native-hooks-persist`
+
+or
+
+`npm install react-native-hooks-persist`
+
+### Methods
+
+
+| Name               | Description               |
+| :----------------- | :------------------------ |
+| useStatePersist    | Main hook persist method  |
+| removeStatePersist | Remove an item from Store |
+| debugStatePersist  | Debug all items on Store  |
+
+## Basic usage
+
+### imports
+```
+import {
+  useStatePersist,
+  removeStatePersist,
+  debugStatePersist,
+} from 'react-native-hooks-persist';
+
+const DB_NAME = 'globalStorage';
+const FIELD_KEY = 'selectedColor';
+const INITIAL_VALUE = 'Red';
+```
+
+### Create
+`const [color, setColor] = useStatePersist(DB_NAME, FIELD_KEY, INITIAL_VALUE);`
+### Read
+`<Text>{color.selectedColor} Selected</Text>`
+### Update
+`setColor(DB_NAME, FIELD_KEY, 'Blue');`
+### Delete
+`removeStatePersist(DB_NAME, FIELD_KEY);`
+### Debug all Items
+`debugStatePersist(DB_NAME);`
+
+<a href="url"><img src="demo/images/scrshtdebug.png" align="center" ></a>
+
+
+## Example in `/demo`
+
+### Run in demo folder:
+- `yarn` or `npm install`
+
+- `react-native start`
+
+- `react-native run-ios` or `react-native run-android`
+
+<a href="url"><img src="demo/images/scrsht01.png" align="center" height="400" ></a>
+
+## Contributing
+
+- Clone this Repo
+- Install dependencies
+- Checkout develop branch
+- Add your feature or fix
+- Make sure your improvement works
+- Open a pull request
+
+---
+Baked with Love ♥ from Cologne & Huelva
