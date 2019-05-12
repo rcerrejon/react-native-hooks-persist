@@ -1,0 +1,21 @@
+{
+  "name": "react-native-hooks-persist",
+  "version": "1.0.0",
+  "description": "React Native Hooks Persist with Async Storage",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcerrejon/react-native-hooks-persist.git"
+  },
+  "keywords": [
+    "react-native",
+    "async-storage",
+    "hooks"
+  ],
+  "author": "Rafael Cerrejon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rcerrejon/react-native-hooks-persist/issues"
+  },
+  "homepage": "https://github.com/rcerrejon/react-native-hooks-persist#readme"
+}
