@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export function useStatePersist(dbName, fieldKey, fieldValue) {
+  let isGetStoreSubscribed = true;
   function getStore() {
     AsyncStorage.getItem(dbName)
       .then(item => {
+        if (!isGetStoreSubscribed) {
+          return;
+        }
         if (item !== null) {
           const parsedItem = JSON.parse(item);
           setValue(parsedItem);
@@ -16,6 +20,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
       .catch(error => console.log('get Item failed with error: ', error));
   }
 
+  let isSetStoreSubscribed = true;
   function setStore(db, key, value) {
     AsyncStorage.getItem(db)
       .then(item => {
@@ -25,7 +30,9 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           const objToSave = { ...parsedItem, ...objCreated };
           try {
             AsyncStorage.setItem(dbName, JSON.stringify(objToSave));
-            setValue(objToSave);
+            if (isSetStoreSubscribed) {
+              setValue(objToSave);
+            }
           } catch (error) {
             console.log('set Item failed with error: ', error);
           }
@@ -33,7 +40,9 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           const objectToSave = { [key]: value };
           try {
             AsyncStorage.setItem(db, JSON.stringify(objectToSave));
-            setValue(objectToSave);
+            if (isSetStoreSubscribed) {
+              setValue(objectToSave);
+            }
           } catch (error) {
             console.log('set Item failed with error: ', error);
           }
@@ -46,7 +55,15 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     const initValue = { [fieldKey]: fieldValue };
     return initValue;
   });
-  useEffect(getStore);
+
+  useEffect(() => {
+    getStore();
+    return () => {
+      isGetStoreSubscribed = false;
+      isSetStoreSubscribed = false;
+    };
+  });
+
   return [getValue, setStore];
 }
 
