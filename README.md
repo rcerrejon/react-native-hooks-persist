@@ -1,4 +1,5 @@
 # React-Native Hooks Persist
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 <a href="url"><img src="demo/images/hook.png" align="left" height="250" ></a>
 
@@ -82,3 +83,19 @@ const INITIAL_VALUE = 'Red';
 
 ---
 Baked with Love ♥ from Cologne & Huelva
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Yaxian"><img src="https://avatars1.githubusercontent.com/u/9707805?v=4" width="100px;" alt="Yaxian"/><br /><sub><b>Yaxian</b></sub></a><br /><a href="https://github.com/rcerrejon/react-native-hooks-persist/commits?author=Yaxian" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
