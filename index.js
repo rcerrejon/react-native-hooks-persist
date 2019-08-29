@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export function useStatePersist(dbName, fieldKey, fieldValue) {
+  let isGetStoreSubscribed = true;
   function getStore() {
     AsyncStorage.getItem(dbName)
       .then(item => {
+        if (!isGetStoreSubscribed) {
+          return;
+        }
         if (item !== null) {
           const parsedItem = JSON.parse(item);
           setValue(parsedItem);
@@ -46,7 +50,13 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     const initValue = { [fieldKey]: fieldValue };
     return initValue;
   });
-  useEffect(getStore);
+
+  useEffect(() => {
+    getStore();
+    return () => {
+      isGetStoreSubscribed = false;
+    };
+  });
   return [getValue, setStore];
 }
 
