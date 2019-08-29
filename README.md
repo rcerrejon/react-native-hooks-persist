@@ -1,5 +1,4 @@
 # React-Native Hooks Persist
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 <a href="url"><img src="demo/images/hook.png" align="left" height="250" ></a>
 
@@ -7,7 +6,7 @@ React Native Hooks Persist with Async Storage
 
 ![language](https://img.shields.io/github/languages/top/rcerrejon/react-native-hooks-persist.svg)
 
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/rcerrejon/react-native-hooks-persist.svg)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 ![NPM](https://img.shields.io/npm/l/react-native-hooks-persist.svg)
 
