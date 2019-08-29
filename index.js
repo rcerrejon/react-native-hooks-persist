@@ -20,6 +20,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
       .catch(error => console.log('get Item failed with error: ', error));
   }
 
+  let isSetStoreSubscribed = true;
   function setStore(db, key, value) {
     AsyncStorage.getItem(db)
       .then(item => {
@@ -29,7 +30,9 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           const objToSave = { ...parsedItem, ...objCreated };
           try {
             AsyncStorage.setItem(dbName, JSON.stringify(objToSave));
-            setValue(objToSave);
+            if (isSetStoreSubscribed) {
+              setValue(objToSave);
+            }
           } catch (error) {
             console.log('set Item failed with error: ', error);
           }
@@ -37,7 +40,9 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           const objectToSave = { [key]: value };
           try {
             AsyncStorage.setItem(db, JSON.stringify(objectToSave));
-            setValue(objectToSave);
+            if (isSetStoreSubscribed) {
+              setValue(objectToSave);
+            }
           } catch (error) {
             console.log('set Item failed with error: ', error);
           }
@@ -55,8 +60,10 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     getStore();
     return () => {
       isGetStoreSubscribed = false;
+      isSetStoreSubscribed = false;
     };
   });
+
   return [getValue, setStore];
 }
 
