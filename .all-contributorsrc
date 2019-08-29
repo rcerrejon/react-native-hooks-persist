@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Yaxian",
+      "name": "Yaxian",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9707805?v=4",
+      "profile": "https://github.com/Yaxian",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-native-hooks-persist",
+  "projectOwner": "rcerrejon",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
