@@ -1,6 +1,6 @@
 {
   "name": "react-native-hooks-persist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Native Hooks Persist with Async Storage",
   "main": "index.js",
   "repository": {
