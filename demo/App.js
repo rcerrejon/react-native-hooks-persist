@@ -59,6 +59,14 @@ const App = (props: any) => {
       </View>
       <View style={styles.buttonSelectedContainer}>
         <Button
+          onPress={() =>
+            setValue(DB_NAME, { [FIELD_KEY]: 4, [FIELD_KEY_COLOR]: 'Black' })
+          }
+          title="Set 4 & Set Black"
+        />
+      </View>
+      <View style={styles.buttonSelectedContainer}>
+        <Button
           onPress={() => debugStatePersist(DB_NAME)}
           title="Debug State Persist"
         />

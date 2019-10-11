@@ -25,7 +25,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
     AsyncStorage.getItem(db)
       .then(item => {
         if (item) {
-          const objCreated = { [key]: value };
+          const objCreated = typeof key === 'object' ? key : { [key]: value };
           const parsedItem = JSON.parse(item);
           const objToSave = { ...parsedItem, ...objCreated };
           try {
@@ -37,7 +37,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
             console.log('set Item failed with error: ', error);
           }
         } else {
-          const objectToSave = { [key]: value };
+          const objectToSave = typeof key === 'object' ? key : { [key]: value };
           try {
             AsyncStorage.setItem(db, JSON.stringify(objectToSave));
             if (isSetStoreSubscribed) {
