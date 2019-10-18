@@ -14,6 +14,7 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
           setValue(parsedItem);
         } else {
           const initObjectToSave = { [fieldKey]: fieldValue };
+          setStore(dbName, fieldKey, fieldValue);
           setValue(initObjectToSave);
         }
       })
@@ -24,28 +25,19 @@ export function useStatePersist(dbName, fieldKey, fieldValue) {
   function setStore(db, key, value) {
     AsyncStorage.getItem(db)
       .then(item => {
+        const objectCreated = typeof key === 'object' ? key : { [key]: value };
+        let objToSave = objectCreated;
         if (item) {
-          const objCreated = { [key]: value };
           const parsedItem = JSON.parse(item);
-          const objToSave = { ...parsedItem, ...objCreated };
-          try {
-            AsyncStorage.setItem(dbName, JSON.stringify(objToSave));
-            if (isSetStoreSubscribed) {
-              setValue(objToSave);
-            }
-          } catch (error) {
-            console.log('set Item failed with error: ', error);
+          objToSave = { ...parsedItem, ...objectCreated };
+        }
+        try {
+          AsyncStorage.setItem(db, JSON.stringify(objToSave));
+          if (isSetStoreSubscribed) {
+            setValue(objToSave);
           }
-        } else {
-          const objectToSave = { [key]: value };
-          try {
-            AsyncStorage.setItem(db, JSON.stringify(objectToSave));
-            if (isSetStoreSubscribed) {
-              setValue(objectToSave);
-            }
-          } catch (error) {
-            console.log('set Item failed with error: ', error);
-          }
+        } catch (error) {
+          console.log('set Item failed with error: ', error);
         }
       })
       .catch(error => console.log('get Item failed with error: ', error));
