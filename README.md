@@ -15,7 +15,9 @@ React Native Hooks Persist with Async Storage
 ![GitHub stars](https://img.shields.io/github/stars/rcerrejon/react-native-hooks-persist.svg?style=social)
 
 ## Getting Started
+
 ### Install
+
 `yarn add react-native-hooks-persist`
 
 or
@@ -23,7 +25,6 @@ or
 `npm install react-native-hooks-persist`
 
 ### Methods
-
 
 | Name               | Description               |
 | :----------------- | :------------------------ |
@@ -34,6 +35,7 @@ or
 ## Basic usage
 
 ### imports
+
 ```
 import {
   useStatePersist,
@@ -47,22 +49,35 @@ const INITIAL_VALUE = 'Red';
 ```
 
 ### Create
+
 `const [color, setColor] = useStatePersist(DB_NAME, FIELD_KEY, INITIAL_VALUE);`
+
 ### Read
+
 `<Text>{color.selectedColor} Selected</Text>`
+
 ### Update
+
 `setColor(DB_NAME, FIELD_KEY, 'Blue');`
+
+### Update with an Object (MultiSet)
+
+`setValue(DB_NAME, { [FIELD_KEY]: 4, [FIELD_KEY_COLOR]: 'Black' });`
+
 ### Delete
+
 `removeStatePersist(DB_NAME, FIELD_KEY);`
+
 ### Debug all Items
+
 `debugStatePersist(DB_NAME);`
 
 <a href="url"><img src="demo/images/scrshtdebug.png" align="center" ></a>
 
-
 ## Example in `/demo`
 
 ### Run in demo folder:
+
 - `yarn` or `npm install`
 
 - `react-native start`
@@ -81,6 +96,7 @@ const INITIAL_VALUE = 'Red';
 - Open a pull request
 
 ---
+
 Baked with Love ♥ from Cologne & Huelva
 
 ## Contributors ✨
